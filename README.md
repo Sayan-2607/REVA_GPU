@@ -30,36 +30,38 @@ Jobs are ranked using a scoring function based on bid value, reliability, resour
 
 ---
 
-## Mechanism
+## RAVA Scoring Function
 
-RAVA ranks submitted jobs using the following score:
+RAVA ranks submitted jobs using a reliability-aware allocation scoring function:
 
-\[
-S_i =
-\frac{
-b_i \cdot g_{\kappa}(\rho_i)
-\cdot \eta_i^{\gamma}
+$$
+S_i = \frac{
+b_i \cdot g_{\kappa}(\rho_i) \cdot \eta_i^{\gamma}
 \cdot (1+\lambda\phi_i)
-}{
-D_i^{\alpha}
-}
-\]
+}{D_i^{\alpha}}
+$$
 
-where the score incorporates bid value, reliability adjustment, resource efficiency, and demand-related factors.
+The scoring function considers the following factors:
 
-The allocation procedure:
+- **Bid value (\(b_i\))** — Economic value submitted by the tenant.
+- **Reliability adjustment (\(g_{\kappa}(\rho_i)\))** — Reliability-based weighting parameterized by the deposit rate \(\kappa\).
+- **Tenant reliability (\(\rho_i\))** — Estimated probability of successful job execution.
+- **Resource efficiency (\(\eta_i\))** — Resource-efficiency factor.
+- **Efficiency exponent (\(\gamma\))** — Controls the influence of resource efficiency.
+- **Flexibility factor (\(\phi_i\))** — Captures job scheduling flexibility.
+- **Flexibility weight (\(\lambda\))** — Controls the contribution of flexibility.
+- **Resource demand (\(D_i\))** — Demand-related allocation factor.
+- **Demand exponent (\(\alpha\))** — Controls the demand penalty.
 
-1. Computes the score for each submitted job.
-2. Sorts jobs in descending score order.
-3. Greedily packs feasible jobs onto available servers.
-4. Supports gang jobs requiring multiple servers.
-5. Computes critical bids for allocated jobs.
-6. Applies pay-on-use settlement and deposit rules.
-7. Updates tenant reliability between epochs.
+### Allocation Workflow
 
-The mechanism is designed to balance economic value, reliability, and resource utilization under cluster scheduling constraints.
-
----
+1. Calculate the allocation score for every submitted job.
+2. Rank jobs in descending order of their scores.
+3. Greedily allocate feasible jobs to available servers.
+4. Support multi-server gang scheduling.
+5. Determine critical bids for winning jobs.
+6. Apply pay-on-use settlement and deposit rules.
+7. Update tenant reliability between auction epochs.
 
 ## Installation
 
