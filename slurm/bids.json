@@ -1,0 +1,6 @@
+[{"name":"J1","user":"llm-team","gpus":6,"cpus":24,"mem_gb":128,"slots":3,"window":[0,3],"bid":130,"command":"sleep 50"},
+ {"name":"J2","user":"vision","gpus":4,"cpus":16,"mem_gb":64,"slots":2,"window":[0,3],"bid":48,"command":"sleep 30"},
+ {"name":"J3","user":"inference","gpus":2,"cpus":8,"mem_gb":32,"slots":2,"window":[1,2],"bid":30,"command":"sleep 30"},
+ {"name":"J4","user":"hpo","gpus":4,"cpus":16,"mem_gb":64,"slots":2,"window":[0,3],"bid":40,"command":"sleep 5; exit 1"},
+ {"name":"J5","user":"etl","gpus":0,"cpus":32,"mem_gb":128,"slots":2,"window":[0,3],"bid":18,"command":"sleep 30"},
+ {"name":"J6","user":"student","gpus":2,"cpus":8,"mem_gb":32,"slots":4,"window":[0,3],"bid":22,"command":"sleep 70"}]

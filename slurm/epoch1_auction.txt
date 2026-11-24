@@ -1,0 +1,7 @@
+J1   user=llm-team   bid= 130.0 rho=0.55 score= 34.00 lose
+J2   user=vision     bid=  48.0 rho=0.95 score= 35.47 WIN  slot 0 price 46.02 job 9
+J3   user=inference  bid=  30.0 rho=0.98 score= 29.40 WIN  slot 1 price 28.57 job 10
+J4   user=hpo        bid=  40.0 rho=0.90 score= 28.00 WIN  slot 2 price 0.00 job 11
+J5   user=etl        bid=  18.0 rho=0.97 score= 13.58 WIN  slot 0 price 0.00 job 12
+J6   user=student    bid=  22.0 rho=0.92 score= 14.31 WIN  slot 0 price 0.00 job 13
+auction time 160.9 ms

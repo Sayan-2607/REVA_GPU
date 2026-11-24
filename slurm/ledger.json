@@ -1,0 +1,78 @@
+{
+ "epoch_start": "2026-11-19T17:54:13",
+ "slot": 20,
+ "kappa": 0.0,
+ "auction_seconds": 0.16093897819519043,
+ "jobs": [
+  {
+   "name": "J1",
+   "user": "llm-team",
+   "bid": 130,
+   "rho": 0.55,
+   "score": 34.00227933536222,
+   "won": false,
+   "price": 0.0,
+   "planned_slot": -1
+  },
+  {
+   "name": "J2",
+   "user": "vision",
+   "bid": 48,
+   "rho": 0.95,
+   "score": 35.468476144317215,
+   "won": true,
+   "price": 46.01577472504085,
+   "planned_slot": 0,
+   "slurm_id": "9",
+   "begin": "2026-11-19T17:54:13"
+  },
+  {
+   "name": "J3",
+   "user": "inference",
+   "bid": 30,
+   "rho": 0.98,
+   "score": 29.4,
+   "won": true,
+   "price": 28.572886260191105,
+   "planned_slot": 1,
+   "slurm_id": "10",
+   "begin": "2026-11-19T17:54:33"
+  },
+  {
+   "name": "J4",
+   "user": "hpo",
+   "bid": 40,
+   "rho": 0.9,
+   "score": 28.001428534987284,
+   "won": true,
+   "price": 0.0,
+   "planned_slot": 2,
+   "slurm_id": "11",
+   "begin": "2026-11-19T17:54:53"
+  },
+  {
+   "name": "J5",
+   "user": "etl",
+   "bid": 18,
+   "rho": 0.9696969696969697,
+   "score": 13.576450198781714,
+   "won": true,
+   "price": 0.0,
+   "planned_slot": 0,
+   "slurm_id": "12",
+   "begin": "2026-11-19T17:54:13"
+  },
+  {
+   "name": "J6",
+   "user": "student",
+   "bid": 22,
+   "rho": 0.92,
+   "score": 14.311841251215723,
+   "won": true,
+   "price": 0.0,
+   "planned_slot": 0,
+   "slurm_id": "13",
+   "begin": "2026-11-19T17:54:13"
+  }
+ ]
+}

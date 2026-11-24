@@ -1,0 +1,13 @@
+{
+  "rava": {"kappa": 0.0, "alpha": 0.5, "gamma": 0.0, "lambda": 0.2, "reserve": 0.0},
+  "reputation": {"a0": 4.0, "b0": 1.0, "zeta": 1.0, "rho_min": 0.05},
+  "philly_reputation_prior": {"a0": 3.0, "b0": 1.0},
+  "synthetic": {"cluster": {"gpu": 32, "cpu": 256, "mem_gb": 1024}, "slots": 24, "sizes": [40, 80, 120, 160],
+                "workloads_per_size": 50, "seed": "1000*n + s", "unreliable_share": 0.2,
+                "unreliable_q": [0.3, 0.6], "reliable_q": [0.85, 0.99]},
+  "philly": {"days": ["2017-10-03", "2017-11-30"], "validation_until": "2017-10-16", "servers_8gpu": 16, "servers_2gpu": 16,
+             "horizon_slots": 48, "sample_fraction": 0.35, "max_job_hours": 24, "seeds": [1, 2, 3]},
+  "baselines": {"first_price_shading": [0.6, 0.9], "overbooking_tau": 0.1, "mcafee_sellers": 8,
+                "opd_price_percentiles": [5, 95]},
+  "statistics": {"bootstrap_samples": 10000, "test": "Wilcoxon signed-rank", "correction": "Holm", "effect_size": "Cohen d_z"}
+}

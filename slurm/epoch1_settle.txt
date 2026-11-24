@@ -1,0 +1,5 @@
+{'name': 'J2', 'user': 'vision', 'state': 'COMPLETED', 'charge': 46.02, 'start_delay_s': 1.0, 'new_rho': 0.952}
+{'name': 'J3', 'user': 'inference', 'state': 'COMPLETED', 'charge': 28.57, 'start_delay_s': 2.0, 'new_rho': 0.98}
+{'name': 'J4', 'user': 'hpo', 'state': 'FAILED', 'charge': 0.0, 'start_delay_s': 2.0, 'new_rho': 0.857}
+{'name': 'J5', 'user': 'etl', 'state': 'COMPLETED', 'charge': 0.0, 'start_delay_s': 1.0, 'new_rho': 0.971}
+{'name': 'J6', 'user': 'student', 'state': 'COMPLETED', 'charge': 0.0, 'start_delay_s': 1.0, 'new_rho': 0.923}

@@ -1,0 +1,54 @@
+\begin{figure*}[!t]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize, >={Stealth[length=2.2mm]},
+  box/.style={draw=ravagrey, rounded corners=2pt, align=center, inner sep=4pt, line width=0.5pt},
+  stp/.style={box, fill=white, minimum width=2.25cm, minimum height=1.05cm},
+  acc/.style={stp, draw=ravablue, line width=1pt, fill=ravalight},
+  lab/.style={font=\scriptsize, text=ravagrey, align=center},
+  flow/.style={->, line width=0.6pt, draw=ravagrey}]
+% tenants
+\node[box, minimum width=2.3cm, minimum height=0.6cm] (t1) at (-0.5,1.15) {Training job};
+\node[box, minimum width=2.3cm, minimum height=0.6cm] (t2) at (-0.5,0.35) {Inference job};
+\node[box, minimum width=2.3cm, minimum height=0.6cm] (t3) at (-0.5,-0.45) {CPU analytics job};
+\node[lab, above=1pt of t1] (tl) {\textbf{Tenants} $i=1,\dots,n$};
+\node[draw=ravagrey, dashed, rounded corners=3pt, fit=(t1)(t2)(t3)(tl), inner sep=4pt] (T) {};
+% auctioneer
+\node[acc] (s1) at (4.3,0.35) {\textbf{\textcircled{\scriptsize 1} Score}\\$\sigma_i=b_i\,w_i$\\$w_i\propto g_\kappa(\rho_i)$};
+\node[stp, right=0.42cm of s1] (s2) {\textbf{\textcircled{\scriptsize 2} Allocate}\\greedy first-fit\\(Alg.~\ref{alg:alloc})};
+\node[stp, right=0.42cm of s2] (s3) {\textbf{\textcircled{\scriptsize 3} Price}\\critical value\\(Alg.~\ref{alg:pay})};
+\begin{scope}[on background layer]
+\node[draw=ravablue, fill=ravablue!4, rounded corners=4pt, fit=(s1)(s2)(s3), inner sep=7pt, label={[lab, anchor=south]north:\textbf{RAVA auctioneer, epoch $k$} (weights fixed within the epoch)}] (A) {};
+\end{scope}
+\draw[flow] (T.east |- A.west) -- node[lab, above]{sealed bids} node[lab, below, align=center]{$b_i,\mathbf{d}_i,$\\$\ell_i,[a_i,e_i]$} (A.west);
+\draw[flow] (s1) -- (s2); \draw[flow] (s2) -- (s3);
+% cluster grid
+\begin{scope}[shift={(12.85,-0.28)}]
+  \foreach \x in {0,...,5}{\foreach \y in {0,1,2}{\draw[ravagrey!60, line width=0.3pt, fill=white] (\x*0.42,\y*0.42) rectangle ++(0.42,0.42);}}
+  \fill[ravablue!55] (0,0.84) rectangle (0.84,1.26); \fill[ravablue!30] (0.84,0.84) rectangle (2.10,1.26);
+  \fill[ravablue!55] (0,0.42) rectangle (1.26,0.84); \fill[ravablue!30] (1.26,0.42) rectangle (2.52,0.84);
+  \fill[ravablue!20] (0.42,0) rectangle (2.10,0.42);
+  \foreach \x in {0,...,5}{\foreach \y in {0,1,2}{\draw[ravagrey!60, line width=0.3pt] (\x*0.42,\y*0.42) rectangle ++(0.42,0.42);}}
+  \node[lab, anchor=west] at (2.55,1.05) {GPU}; \node[lab, anchor=west] at (2.55,0.63) {CPU}; \node[lab, anchor=west] at (2.55,0.21) {Mem};
+  \node[lab, anchor=north] at (0.9,-0.02) {slots $t$};
+  \coordinate (Cw) at (0,0.63);
+  \coordinate (Cd) at (2.2,0);
+  \node[lab, anchor=south] at (1.26,1.30) {\textbf{Cluster} (Slurm), servers $h$};
+\end{scope}
+\draw[flow] (A.east) -- node[lab, above]{$x_i,s_i$} node[lab, below]{\texttt{sbatch}} (Cw);
+% bottom row
+\node[box, minimum width=3.3cm, minimum height=0.95cm] (tel) at (14.0,-2.45) {\textbf{\textcircled{\scriptsize 4} Execute \& settle}\\pay $p_i$ if the job runs\\forfeit $\kappa p_i$ on a no-show};
+\node[box, minimum width=3.3cm, minimum height=0.95cm] (rep) at (8.9,-2.45) {\textbf{\textcircled{\scriptsize 5} Attribute store}\\reputation $\rho_i$ (Beta, $\zeta$)\\efficiency $\eta_i$, priority $\pi_i$};
+\node[box, minimum width=3.3cm, minimum height=0.95cm] (pol) at (3.3,-2.45) {\textbf{Operator policy}\\reserve $\psi_{k+1}=\psi_k e^{\beta(U_k-U^*)}$\\weights $\kappa,\alpha,\gamma,\lambda$};
+\draw[flow] (Cd) -- (Cd |- tel.north);
+\draw[flow] (tel.west) -- node[lab, above]{outcomes} (rep.east);
+\draw[flow] (rep.west) -- node[lab, above]{$U_k$} (pol.east);
+\coordinate (M) at ($(s1.south)+(0,-0.95)$);
+\draw[line width=0.6pt, dashed, draw=ravablue] (rep.north) |- (M);
+\draw[line width=0.6pt, dashed, draw=ravablue] (pol.north) |- (M);
+\draw[flow, dashed, draw=ravablue] (M) -- (s1.south);
+\node[lab, text=ravablue, anchor=south west] at ($(M)+(0.15,0.02)$) {$\rho,\eta,\pi$ and $\psi,\kappa,\alpha,\gamma,\lambda$ published before epoch $k{+}1$};
+\end{tikzpicture}
+\caption{RAVA system. Tenants send sealed bids. RAVA scores, allocates and prices them with weights fixed for the epoch (steps 1--3) and submits winners to Slurm at their slot. After execution it settles on use and updates reputation (steps 4--5); new values are published before the next epoch (dashed).}
+\label{fig:arch}
+\end{figure*}
